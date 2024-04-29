@@ -32,25 +32,32 @@
 </head>
 <body>
     <div id="address-bar">
-        <form id="address-form">
-            <input type="text" id="url-input" placeholder="Enter URL">
-            <button type="submit">Go</button>
-        </form>
+        <input type="text" id="url-input" placeholder="Enter URL">
+        <button id="go-button">Go</button>
     </div>
     <div id="browser-frame">
-        <iframe id="web-frame" src="sgamingfun.github.io"></iframe>
+        <iframe id="web-frame" src="https://www.example.com"></iframe>
     </div>
 
     <script>
-        const form = document.getElementById('address-form');
         const input = document.getElementById('url-input');
+        const button = document.getElementById('go-button');
         const frame = document.getElementById('web-frame');
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
+        button.addEventListener('click', function() {
             const url = input.value.trim();
             if (url !== '') {
                 frame.src = url;
+            }
+        });
+
+        // Optionally, you can also make it update the URL on Enter key press
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const url = input.value.trim();
+                if (url !== '') {
+                    frame.src = url;
+                }
             }
         });
     </script>
