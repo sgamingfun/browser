@@ -10,56 +10,29 @@
         }
         #address-bar {
             width: 80%;
-            margin: 20px auto;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            margin: 10px auto;
+            font-size: 16px;
         }
         #browser-frame {
             width: 80%;
             height: 500px;
             margin: 0 auto;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        #browser-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
         }
     </style>
 </head>
 <body>
-    <div id="address-bar">
-        <input type="text" id="url-input" placeholder="Enter URL">
-        <button id="go-button">Go</button>
-    </div>
-    <div id="browser-frame">
-        <iframe id="web-frame" src="https://www.example.com"></iframe>
-    </div>
+    <input type="text" id="address-bar" placeholder="Enter URL">
+    <button onclick="loadPage()">Go</button>
+    <div id="browser-frame"></div>
 
     <script>
-        const input = document.getElementById('url-input');
-        const button = document.getElementById('go-button');
-        const frame = document.getElementById('web-frame');
-
-        button.addEventListener('click', function() {
-            const url = input.value.trim();
-            if (url !== '') {
-                frame.src = url;
-            }
-        });
-
-        // Optionally, you can also make it update the URL on Enter key press
-        input.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                const url = input.value.trim();
-                if (url !== '') {
-                    frame.src = url;
-                }
-            }
-        });
+        function loadPage() {
+            var url = document.getElementById("address-bar").value;
+            var browserFrame = document.getElementById("browser-frame");
+            browserFrame.innerHTML = "<iframe src='" + url + "' style='width:100%; height:100%; border: none;'></iframe>";
+        }
     </script>
 </body>
 </html>
