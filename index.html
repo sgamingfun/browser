@@ -3,91 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Web Browser</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        #address-bar {
-            width: 80%;
-            padding: 10px;
-            margin: 10px auto;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            outline: none;
-        }
-        #go-button {
-            padding: 10px 20px;
-            margin-left: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        #go-button:hover {
-            background-color: #0056b3;
-        }
-        #browser-frame {
-            width: 80%;
-            height: 500px;
-            margin: 0 auto;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        #error-message {
-            margin-top: 10px;
-            color: red;
-        }
-    </style>
+    <title>Embedded Browser</title>
 </head>
 <body>
-    <input type="text" id="address-bar" placeholder="Enter URL">
-    <button id="go-button" onclick="loadPage()">Go</button>
-    <div id="browser-frame"></div>
-    <div id="error-message"></div>
+    <input type="text" id="urlInput" placeholder="Enter URL">
+    <button onclick="loadPage()">Go</button>
+    <iframe id="browserFrame" width="100%" height="500"></iframe>
 
-    <script>
-        function loadPage() {
-            var url = document.getElementById("address-bar").value;
-            var browserFrame = document.getElementById("browser-frame");
-            var errorMessage = document.getElementById("error-message");
-
-            // Clear previous error messages
-            errorMessage.textContent = "";
-
-            // Validate URL
-            if (!isValidURL(url)) {
-                errorMessage.textContent = "Invalid URL. Please enter a valid URL.";
-                return;
-            }
-
-            // Try loading the page
-            browserFrame.innerHTML = "<iframe src='" + url + "' style='width:100%; height:100%; border: none;'></iframe>";
-        }
-
-        function isValidURL(url) {
-            var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-              '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-              '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-              '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-              '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-              '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-            return !!pattern.test(url);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
-
